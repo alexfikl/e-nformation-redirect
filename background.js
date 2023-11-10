@@ -6,20 +6,31 @@ const ENFORMATION_SOURCE_IDS = {
 };
 
 function transformUrl(url, callback) {
-    browser.storage.sync.get({"university_id": DEFAULT_UNIVERSITY}, (items) => {
-        var university_id = items["university_id"];
-        var url = "https://www.e-nformation.ro";
+    var a = new URL(url);
+    if (a.hostname in ENFORMATION_SOURCE_IDS) {
+        browser.storage.sync.get({"university_id": DEFAULT_UNIVERSITY}, (items) => {
+            var university_id = items["university_id"];
+            var eurl = "https://www.e-nformation.ro";
 
-        if (university_id) {
-            if (url.hostname in ENFORMATION_SOURCE_IDS) {
-                url = (
-                    BASE_URL
+            if (university_id) {
+                eurl = (
+                    ENFORMATION_URL
                     .replace("$@", university_id)
-                    .replace("$@", ENFORMATION_SOURCE_ID[url.hostname]));
+                    .replace("$@", ENFORMATION_SOURCE_IDS[a.hostname]));
             }
-        }
-        callback(url);
-    });
+            callback(eurl);
+        });
+    } else {
+        browser.storage.sync.get({"original_url": null}, (items) => {
+            var original_url = items["original_url"];
+            if (original_url) {
+                ao = new URL(original_url);
+                eurl = new URL(ao.pathname, url).href;
+
+                callback(eurl);
+            }
+        });
+    }
 }
 
 browser.action.onClicked.addListener((tab) => {
