@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title>Enformation Redirect Options</title>
+        <script src="options.js"></script>
+    </head>
+    <body>
+        <h2>Enformation Redirect Options</h2>
+        <input type="radio" id="university_select" name="university_type"/>
+        <label for="university_id_select">Select School:</label>
+        <select id="university_id_select">
+            <option value="UnivdeVestTM">West University of Timișoara</option>
+            <option value="UnivdeVestTM2">West University of Timișoara 2</option>
+        </select>
+        <p><strong>-OR-</strong></p>
+        <p>If the university identifier is not listed, add it below.</p>
+        <input type="radio" id="university_custom" name="university_type"/>
+        <label for="university_id_box">University Identifier:</label>
+        <input id="university_id_box" type="url" size="60"/>
+        <p>
+        <button id="save_button">Save</button>
+        <span id="status"></span>
+        </p>
+    </body>
+</html>
