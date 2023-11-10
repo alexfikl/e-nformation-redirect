@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", () => {
     var status_field;
     var university_box;
     var select_box;
@@ -22,17 +22,17 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function save_options() {
-        chrome.storage.sync.set({"university_id": university_box.value}, function() {
+        chrome.storage.sync.set({"university_id": university_box.value}, () => {
             // Update status to let user know options were saved.
             status_field.innerHTML = "Options Saved.";
-            setTimeout(function() {
+            setTimeout(() => {
                 status_field.innerHTML = "";
             }, 2000);
         });
     }
 
     function restore_options() {
-        chrome.storage.sync.get({"university_id": null}, function(items) {
+        chrome.storage.sync.get({"university_id": null}, (items) => {
             var university_id = items["university_id"];
 
             if (university_id) {

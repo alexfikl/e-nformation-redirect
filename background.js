@@ -6,7 +6,7 @@ const ENFORMATION_SOURCE_IDS = {
 };
 
 function transformUrl(url, callback) {
-    browser.storage.sync.get({"university_id": DEFAULT_UNIVERSITY}, function(items) {
+    browser.storage.sync.get({"university_id": DEFAULT_UNIVERSITY}, (items) => {
         var university_id = items["university_id"];
         var url = "https://www.e-nformation.ro";
 
@@ -22,29 +22,25 @@ function transformUrl(url, callback) {
     });
 }
 
-browser.browserAction.onClicked.addListener(function(tab) {
-    transformUrl(tab.url, function(newUrl) {
+browser.action.onClicked.addListener((tab) => {
+    transformUrl(tab.url, (newUrl) => {
         browser.tabs.update(tab.id, {"url": newUrl});
     });
 });
 
-browser.contextMenus.onClicked.addListener(function(info, tab) {
-    transformUrl(info.linkUrl, function(newUrl) {
+browser.contextMenus.onClicked.addListener((info, tab) => {
+    transformUrl(info.linkUrl, (newUrl) => {
         browser.tabs.create({"url": newUrl});
     });
 });
 
-function initialize() {
-    browser.contextMenus.create({
-        "title": "Open link through e-nformation",
-        "contexts": ["link"],
-        "id": "redirect"
-    });
-}
-
-browser.runtime.onInstalled.addListener(function(details) {
-    browser.storage.sync.get({"university_id": null}, function(items) {
-        initialize();
+browser.runtime.onInstalled.addListener((details) => {
+    browser.storage.sync.get({"university_id": null}, (items) => {
+        browser.contextMenus.create({
+            "title": "Open link through e-nformation",
+            "contexts": ["link"],
+            "id": "redirect"
+        });
     });
 });
 
