@@ -15,10 +15,23 @@ const ENFORMATION_SOURCE_IDS = {
     // 'ieeexplore.ieee.org': 'IEEEeBooksNOW_AnelisPlus',
     'ieeexplore.ieee.org': 'IEEE_IEL_AnelisPlus',
     'digital-library.theiet.org': 'IETDL_AnelisPlus',
-    'access.clarivate.com': 'InCites_UVT',
+    // 'access.clarivate.com': 'InCites_UVT',
     'iopscience.iop.org': 'IOPJournals_AnelisPlus',
     'mathscinet.ams.org': 'MathSciNet_AnelisPlus',
-    // 'www.nature.com': 'Nature_AnelisPlus'
+    // 'www.nature.com': 'Nature_AnelisPlus',
+    'www.proquest.com': 'PQCentral_AnelisPlus',
+    // 'www.proquest.com': 'PQDT_UVT',
+    'journals.sagepub.com': 'SageJournals_AnelisPlus',
+    'sk.sagepub.com': 'SAGEKnowledgeEbooks_AnelisPlus',
+    'www.scopus.com': 'Scopus_AnelisPlus',
+    'link.springer.com': 'SpringerLink_AnelisPlus',
+    'www.tandfonline.com': 'TandFJournals_UVT',
+    'access.clarivate.com': 'ClarivateWoS_AnelisPlus',
+    // 'onlinelibrary.wiley.com': 'WileyBooks_AnelisPlus',
+    'onlinelibrary.wiley.com': 'WileyJournals_AnelisPlus',
+    'www.degruyter.com': 'DeGruytereBooks_AnelisPlus',
+    'www.igpublish.com': 'iGLibraryALA_AnelisPlus',
+    'portal.igpublish.com': 'iGLibraryALA_AnelisPlus',
 }
 
 function transformUrl (url, callback) {
@@ -29,9 +42,9 @@ function transformUrl (url, callback) {
 
             if (university_id) {
                 const eurl = (
-                ENFORMATION_URL
-                    .replace('$@', university_id)
-                    .replace('$@', ENFORMATION_SOURCE_IDS[a.hostname]))
+                    ENFORMATION_URL
+                        .replace('$@', university_id)
+                        .replace('$@', ENFORMATION_SOURCE_IDS[a.hostname]))
                 console.log(eurl)
                 callback(eurl)
             }
@@ -43,9 +56,9 @@ function transformUrl (url, callback) {
 
             if (original_url) {
                 a = new URL(original_url)
-                eurl = `${url}${a.pathname}`
+                eurl = `${url}${a.pathname.slice(1)}`
                 if (a.search) {
-                    eurl = `${eurl}${a.search}`;
+                    eurl = `${eurl}${a.search}`
                 }
                 console.log(eurl)
                 callback(eurl)
@@ -70,9 +83,9 @@ browser.contextMenus.onClicked.addListener((info, tab) => {
 browser.runtime.onInstalled.addListener((details) => {
     browser.storage.sync.get({ university_id: null }, (items) => {
         browser.contextMenus.create({
-        title: 'Open link through e-nformation',
-        contexts: ['link'],
-        id: 'redirect'
+            title: 'Open link through e-nformation',
+            contexts: ['link'],
+            id: 'redirect'
         })
     })
 })
