@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     selectBox = document.getElementById('university_id_select')
     selectRadio = document.getElementById('university_select')
     customRadio = document.getElementById('university_custom')
-    saveButton = document.getElementById('saveButton')
+    saveButton = document.getElementById('save_button')
 
     selectRadio.addEventListener('click', radioOnClick)
     customRadio.addEventListener('click', radioOnClick)
