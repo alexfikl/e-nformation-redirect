@@ -13,6 +13,10 @@ equivalent redirecting system for it.
 Change Log
 ----------
 
+Version 0.2.0 - November 13, 2023:
+* Fixed many redirection issues and simplified the plugin.
+* Added a list of all ANELIS member universities.
+
 Version 0.1.0 - November 10, 2023:
 * Initial version on GitHub.
 * Simple redirect button.
