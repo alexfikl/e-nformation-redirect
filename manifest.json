@@ -7,7 +7,7 @@
     "background": {
         "scripts": ["background.js"]
     },
-    "options_ui": {"page": "options.html"},
+    "options_ui": { "page": "options.html" },
 
     "permissions": ["contextMenus", "storage", "tabs", "webRequest"],
     "icons": {
@@ -21,11 +21,13 @@
         "default_icon": {
             "32": "icons/icon2-32.png"
         },
-        "theme_icons": [{
-            "light": "icons/icon2-light-32.png",
-            "dark": "icons/icon2-32.png",
-            "size": 32
-        }],
+        "theme_icons": [
+            {
+                "light": "icons/icon2-light-32.png",
+                "dark": "icons/icon2-32.png",
+                "size": 32
+            }
+        ],
         "default_title": "Reload through Enformation"
     },
 
