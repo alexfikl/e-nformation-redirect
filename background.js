@@ -4,6 +4,17 @@ const ENFORMATION_URL = "https://z.e-nformation.ro/$@?action=source&sourceID=$@"
 function patchGenericURL(url, resource) {
     var result = new URL(url);
     result.pathname = resource.pathname;
+    result.search = resource.search;
+    return result.href;
+}
+
+function patchDiscardURL(url, resource) {
+    return url;
+}
+
+function patchAIPURL(url, resource) {
+    var result = new URL(url);
+    result.pathname = `${result.pathname}${resource.pathname}`;
     return result.href;
 }
 
@@ -11,7 +22,7 @@ const ENFORMATION_RESOURCE_URL = {
     APAPsychArticles: "https://06101bc56-y-https-ovidsp-dc1-ovid-com.z.e-nformation.ro",
     ACS_AnelisPlus: "https://0610wbc33-y-https-pubs-acs-org.z.e-nformation.ro",
     AIP_AnelisPlus:
-        "https://z.e-nformation.ro/MuseSessionID=06107bc36/MuseProtocol=https/MuseHost=pubs.aip.org/MusePath/",
+        "https://z.e-nformation.ro/MuseSessionID=06107bc36/MuseProtocol=https/MuseHost=pubs.aip.org/MusePath",
     APS_Vest: "https://06108bc37-y-https-journals-aps-org.z.e-nformation.ro",
     CabiDL_AnelisPlus:
         "https://0610hbc38-y-https-www-cabidigitallibrary-org.z.e-nformation.ro",
@@ -63,7 +74,7 @@ const ENFORMATION_RESOURCE_URL = {
 const ENFORMATION_SOURCE_IDS = {
     // 'oce.ovid.com': { name: 'APAPsychArticles', patch: patchGenericURL },
     "pubs.acs.org": { name: "ACS_AnelisPlus", patch: patchGenericURL },
-    "pubs.aip.org": { name: "AIP_AnelisPlus", patch: patchGenericURL },
+    "pubs.aip.org": { name: "AIP_AnelisPlus", patch: patchAIPURL },
     "journals.aps.org": { name: "APS_Vest", patch: patchGenericURL },
     "www.cabidigitallibrary.org": {
         name: "CabiDL_AnelisPlus",
@@ -89,7 +100,7 @@ const ENFORMATION_SOURCE_IDS = {
         name: "IETDL_AnelisPlus",
         patch: patchGenericURL,
     },
-    // 'access.clarivate.com': { name: 'InCites_UVT', patch: patchGenericURL },
+    "incites.clarivate.com": { name: "InCites_UVT", patch: patchGenericURL },
     "iopscience.iop.org": {
         name: "IOPJournals_AnelisPlus",
         patch: patchGenericURL,
@@ -98,12 +109,9 @@ const ENFORMATION_SOURCE_IDS = {
         name: "MathSciNet_AnelisPlus",
         patch: patchGenericURL,
     },
-    // 'www.nature.com': { name: 'Nature_AnelisPlus', patch: patchGenericURL },
-    "www.proquest.com": {
-        name: "PQCentral_AnelisPlus",
-        patch: patchGenericURL,
-    },
-    // 'www.proquest.com': { name: 'PQDT_UVT', patch: patchGenericURL },
+    "www.nature.com": { name: "Nature_AnelisPlus", patch: patchGenericURL },
+    // "www.proquest.com": { name: "PQCentral_AnelisPlus", patch: patchGenericURL },
+    "www.proquest.com": { name: "PQDT_UVT", patch: patchGenericURL },
     "journals.sagepub.com": {
         name: "SageJournals_AnelisPlus",
         patch: patchGenericURL,
@@ -112,7 +120,7 @@ const ENFORMATION_SOURCE_IDS = {
         name: "SAGEKnowledgeEbooks_AnelisPlus",
         patch: patchGenericURL,
     },
-    "www.scopus.com": { name: "Scopus_AnelisPlus", patch: patchGenericURL },
+    "www.scopus.com": { name: "Scopus_AnelisPlus", patch: patchDiscardURL },
     "link.springer.com": {
         name: "SpringerLink_AnelisPlus",
         patch: patchGenericURL,
@@ -147,7 +155,14 @@ const ENFORMATION_SOURCE_IDS = {
 function transformUrl(url, callback) {
     const link_url = new URL(url);
     if (link_url.hostname in ENFORMATION_SOURCE_IDS) {
-        const resource = ENFORMATION_SOURCE_IDS[link_url.hostname];
+        var resource = ENFORMATION_SOURCE_IDS[link_url.hostname];
+        if (
+            link_url.hostname === "access.clarivate.com" &&
+            link_url.searchParams.get("app") === "incites"
+        ) {
+            resource = ENFORMATION_SOURCE_IDS["incites.clarivate.com"];
+        }
+
         console.log(resource);
         const eurl = resource.patch(ENFORMATION_RESOURCE_URL[resource.name], link_url);
         console.log(eurl);
