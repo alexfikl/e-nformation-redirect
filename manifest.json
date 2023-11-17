@@ -34,7 +34,7 @@
     "browser_specific_settings": {
         "gecko": {
             "id": "enformationredirect@extensions.ro",
-            "strict_min_version": "106.0"
+            "strict_min_version": "110.0"
         }
     }
 }
