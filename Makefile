@@ -21,3 +21,9 @@ black:			## Run black to format python
 		--line-length 88 \
 		--target-version py311 \
 		*.py
+
+xpi: e-nformation-redirect.xpi	## Create a Firefox extension
+.PHONY: xpi
+
+e-nformation-redirect.xpi: background.js manifest.json options.html options.js
+	zip -r $@ icons $^
