@@ -13,14 +13,14 @@ prettier:			## Run prettier to format javascript
 	prettier \
 		--tab-width 4 \
 		--print-width 88 \
-		-w *.js *.json
+		-w *.js *.json scripts/*.json
 
 black:			## Run black to format python
 	python -m black \
 		--safe --preview \
 		--line-length 88 \
 		--target-version py311 \
-		*.py
+		scripts/*.py
 
 xpi: e-nformation-redirect.xpi	## Create a Firefox extension
 .PHONY: xpi
