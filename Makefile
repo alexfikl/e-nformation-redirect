@@ -6,14 +6,14 @@ help: 			## Show this help
 	@echo ""
 .PHONY: help
 
-format: prettier	## Run formatting scripts
+format: black prettier	## Run formatting scripts
 .PHONY: format
 
 prettier:			## Run prettier to format javascript
 	prettier \
 		--tab-width 4 \
 		--print-width 88 \
-		-w *.js *.json *.html
+		-w *.js *.json
 
 black:			## Run black to format python
 	python -m black \
@@ -25,5 +25,5 @@ black:			## Run black to format python
 xpi: e-nformation-redirect.xpi	## Create a Firefox extension
 .PHONY: xpi
 
-e-nformation-redirect.xpi: background.js manifest.json options.html options.js
+e-nformation-redirect.xpi: background.js manifest.json
 	zip -r $@ icons $^
