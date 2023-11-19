@@ -135,7 +135,7 @@ function transformUrl(url, callback) {
         console.log(resource);
 
         // get redirect url
-        var redirect_url = new URL(resource_url);
+        var redirect_url = new URL(resource.url);
         if (resource.name === "AIP_AnelisPlus") {
             redirect_url.pathname = `${redirect_url.pathname}${link_url.pathname}`;
         } else if (resource.name === "Scopus_AnelisPlus") {
