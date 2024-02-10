@@ -107,6 +107,10 @@ const ENFORMATION_RESOURCES = {
         name: "WileyJournals_AnelisPlus",
         url: "https://0610fbc4s-y-https-onlinelibrary-wiley-com.z.e-nformation.ro",
     },
+    "acsess.onlinelibrary.wiley.com": {
+        name: "WileyJournals_AnelisPlus",
+        url: "https://0610fcmi3-y-https-acsess-onlinelibrary-wiley-com.z.e-nformation.ro",
+    },
     "www.degruyter.com": {
         name: "DeGruytereBooks_AnelisPlus",
         url: "https://06103bc4t-y-https-www-degruyter-com.z.e-nformation.ro",

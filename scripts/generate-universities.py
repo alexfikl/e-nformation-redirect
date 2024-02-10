@@ -14,6 +14,16 @@ logger = logging.getLogger(pathlib.Path(__file__).stem)
 logger.setLevel(logging.ERROR)
 logger.addHandler(rich.logging.RichHandler())
 
+SCRIPT_PATH = pathlib.Path(__file__)
+SCRIPT_LONG_HELP = f"""\
+Scrape the ANELIS website `https://www.anelisplus.ro/?page_id=36` for universities
+that are part of the consortium.
+
+Example:
+
+    > {SCRIPT_PATH.name} --json
+"""
+
 # {{{ ANELIS+ members
 
 ANELIS_PLUS_MEMBERS = "https://www.anelisplus.ro/?page_id=36"
@@ -62,21 +72,20 @@ if __name__ == "__main__":
     # main parser
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "-q", "--quiet", action="store_true", help="only show error messages"
+        "-q",
+        "--quiet",
+        action="store_true",
+        help="only show error messages",
     )
     parser.add_argument(
-        "-j", "--json", action="store_true", help="output in JSON format"
+        "-j",
+        "--json",
+        action="store_true",
+        help="output in JSON format",
     )
-
-    # anelis
-    subparsers = parser.add_subparsers()
-    parser_a = subparsers.add_parser("anelis")
-    parser_a.set_defaults(func=lambda args: anelis_plus(to_json=args.json))
-
-    # call
     args = parser.parse_args()
 
     if not args.quiet:
         logger.setLevel(logging.INFO)
 
-    raise SystemExit(args.func(args))
+    raise SystemExit(anelis_plus(to_json=args.json))

@@ -1,3 +1,5 @@
+PYTHON?=python -X dev
+
 all: help
 
 help: 			## Show this help
@@ -13,10 +15,10 @@ prettier:			## Run prettier to format javascript
 	prettier \
 		--tab-width 4 \
 		--print-width 88 \
-		-w *.js *.json scripts/*.json
+		-w *.js *.json data/*.json
 
 black:			## Run black to format python
-	python -m black \
+	$(PYTHON) -m black \
 		--safe --preview \
 		--line-length 88 \
 		--target-version py311 \
@@ -27,3 +29,7 @@ xpi: e-nformation-redirect.xpi	## Create a Firefox extension
 
 e-nformation-redirect.xpi: background.js manifest.json
 	zip -r $@ icons $^
+
+regen: data/resources.toml
+	$(PYTHON) scripts/generate-universities.py --json > universities.json
+	$(PYTHON) scripts/generate-resources.py --json $< > resources.json
