@@ -179,7 +179,19 @@ const ENFORMATION_RESOURCES = [
 
 // {{{ match
 
-function find_resource(url) {
+function can_redirect(url) {
+    for (var iresource = 0; iresource < ENFORMATION_RESOURCES.length; iresource++) {
+        var resource = ENFORMATION_RESOURCES[iresource];
+        var matches = resource.matchPattern.exec(url);
+        if (matches) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function find_redirect(url) {
     for (var iresource = 0; iresource < ENFORMATION_RESOURCES.length; iresource++) {
         // try and match regex
         var resource = ENFORMATION_RESOURCES[iresource];
@@ -207,7 +219,7 @@ function find_resource(url) {
 
 function transformUrl(url, callback) {
     console.log(`Trying to redirect '${url}'!`);
-    const resource = find_resource(url);
+    const resource = find_redirect(url);
 
     if (resource) {
         console.log(`Matched '${resource.name}'.`);
