@@ -8,7 +8,7 @@ help: 			## Show this help
 	@echo ""
 .PHONY: help
 
-format: black prettier	## Run formatting scripts
+format: prettier	## Run formatting scripts
 .PHONY: format
 
 prettier:			## Run prettier to format javascript
@@ -17,19 +17,8 @@ prettier:			## Run prettier to format javascript
 		--print-width 88 \
 		-w *.js *.json data/*.json
 
-black:			## Run black to format python
-	$(PYTHON) -m black \
-		--safe --preview \
-		--line-length 88 \
-		--target-version py311 \
-		scripts/*.py
-
 xpi: e-nformation-redirect.xpi	## Create a Firefox extension
 .PHONY: xpi
 
 e-nformation-redirect.xpi: background.js manifest.json
 	zip -r $@ icons $^
-
-regen: data/resources.toml
-	$(PYTHON) scripts/generate-universities.py --json > universities.json
-	$(PYTHON) scripts/generate-resources.py --json $< > resources.json
