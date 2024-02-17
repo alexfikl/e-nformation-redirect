@@ -11,6 +11,10 @@ equivalent redirecting system for it.
 Change Log
 ----------
 
+Version 0.4.1 - February 17, 2024:
+* Use SVG icons.
+* Change icon color on websites we can redirect.
+
 Version 0.4.0 - February 17, 2024:
 * Use nicer RegEx and more robust matching for resources (mostly inspired by how
   the Redirector plugin works).
