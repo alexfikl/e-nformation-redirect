@@ -11,6 +11,11 @@ equivalent redirecting system for it.
 Change Log
 ----------
 
+Version 0.4.0 - February 17, 2024:
+* Use nicer RegEx and more robust matching for resources (mostly inspired by how
+  the Redirector plugin works).
+* Add support for some of the book subscriptions, e.g. `IEEEeBooksNOW_AnelisPlus`.
+
 Version 0.3.0 - November 18, 2023:
 * Remove useless options.
 

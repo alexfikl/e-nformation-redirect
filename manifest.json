@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "Enformation Redirect",
-    "version": "0.3.2",
+    "version": "0.4.0",
     "homepage_url": "https://github.com/alexfikl/e-nformation-redirect",
     "description": "Quickly reload pages through Enformation",
 
