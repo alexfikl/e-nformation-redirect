@@ -236,12 +236,10 @@ browser.contextMenus.onClicked.addListener((info, tab) => {
 });
 
 browser.runtime.onInstalled.addListener((details) => {
-    browser.storage.sync.get({ university_id: null }, (items) => {
-        browser.contextMenus.create({
-            title: "Open link through e-nformation",
-            contexts: ["link"],
-            id: "redirect",
-        });
+    browser.contextMenus.create({
+        title: "Open link through e-nformation",
+        contexts: ["link"],
+        id: "redirect",
     });
 });
 
