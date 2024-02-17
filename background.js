@@ -235,6 +235,35 @@ function transformUrl(url, callback) {
 
 // {{{ browser
 
+function updateIcon(tabId, url) {
+    browser.action.setIcon({
+        path: canRedirect(url)
+            ? {
+                  32: "icons/icon-dark-on.svg",
+                  48: "icons/icon-dark-on.svg",
+                  128: "icons/icon-dark-on.svg",
+              }
+            : {
+                  32: "icons/icon-dark-off.svg",
+                  48: "icons/icon-dark-off.svg",
+                  128: "icons/icon-dark-off.svg",
+              },
+        tabId: tabId,
+    });
+}
+
+browser.tabs.onUpdated.addListener((tabId, changeInfo, tabInfo) => {
+    if (changeInfo.url) {
+        updateIcon(tabId, changeInfo.url);
+    }
+});
+
+browser.tabs.onActivated.addListener((activeInfo) => {
+    browser.tabs.get(activeInfo.tabId).then((tab) => {
+        updateIcon(tab.id, tab.url);
+    });
+});
+
 browser.action.onClicked.addListener((tab) => {
     transformUrl(tab.url, (newUrl) => {
         browser.tabs.update(tab.id, { url: newUrl });
