@@ -6,10 +6,16 @@ so many thanks go to the original developers of that plugin.
 
 Unfortunately, the [Enformation](https://www.e-nformation.ro) system used by
 Romanian universities doesn't support EZProxy, so this extension builds an
-equivalent redirecting system for it.
+equivalent redirecting system for it. This is mostly equivalent to writing it
+yourself with more general add-ons such as [Redirector](https://addons.mozilla.org/en-US/firefox/addon/redirector/).
 
 Changelog
 ---------
+
+Version 0.4.2 - January 29, 2025:
+* Update some subscriptions to `AnelisPlus`.
+* Add subscription to `Statista_UVT`.
+* Update redirect patterns to new format.
 
 Version 0.4.1 - February 17, 2024:
 * Use SVG icons.
