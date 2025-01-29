@@ -12,7 +12,7 @@
     "IEEEeBooksNOW_AnelisPlus": "https://ieeexplore.ieee.org/book/6451327",
     "IEEE_IEL_AnelisPlus": "https://ieeexplore.ieee.org/document/4690953",
     "IETDL_AnelisPlus": "https://digital-library.theiet.org/content/journals/10.1049/ise.1994.0001",
-    "InCites_UVT": "https://incites.clarivate.com/",
+    "InCites_AnelisPlus": "https://incites.clarivate.com/",
     "IOPJournals_AnelisPlus": "https://iopscience.iop.org/article/10.1088/0026-1394/12/4/002",
     "MathSciNet_AnelisPlus": "https://mathscinet.ams.org/mathscinet/relay-station?mr=2986252",
     "Nature_AnelisPlus": "https://www.nature.com/articles/d41586-023-03272-3",
@@ -22,10 +22,11 @@
     "SAGEKnowledgeEbooks_AnelisPlus": "https://sk.sagepub.com/books/acute-mental-health-nursing/n2.xml",
     "Scopus_AnelisPlus": "https://www.scopus.com/home.uri",
     "SpringerLink_AnelisPlus": "https://link.springer.com/article/10.1007/s12160-017-9901-5",
-    "TandFJournals_UVT": "https://www.tandfonline.com/doi/full/10.1080/00268976.2013.788745",
+    "Statista_UVT": "https://www.statista.com/statistics/433871/daily-social-media-usage-worldwide/",
+    "TandFJournals_AnelisPlus": "https://www.tandfonline.com/doi/full/10.1080/00268976.2013.788745",
     "ClarivateWoS_AnelisPlus": "https://www.webofscience.com/wos/woscc/basic-search",
     "WileyBooks_AnelisPlus": "https://onlinelibrary.wiley.com/doi/book/10.1002/9781119620068",
     "WileyJournals_AnelisPlus": "https://onlinelibrary.wiley.com/doi/10.1002/(SICI)1097-0207(19990120)44:2%3C205::AID-NME499%3E3.0.CO;2-8",
     "DeGruytereBooks_AnelisPlus": "https://www.degruyter.com/document/doi/10.9783/9780812293753/html",
-    "iGLibraryALA_AnelisPlus": "https://portal.igpublish.com/iglibrary/obj/ALAB0000343"
+    "iGLibraryALA_AnelisPlus": "https://portal.igpublish.com/iglibrary/obj/ALAB0000343",
 }
