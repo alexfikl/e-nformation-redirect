@@ -15,7 +15,7 @@ prettier:
 
 [doc("Create the Firefox extension")]
 xpi:
-    zip -r e-nformation-redirect.xpi background.js manifest.json
+    zip -r e-nformation-redirect.xpi icons background.js manifest.json
 
 [doc("Update license text")]
 license:
