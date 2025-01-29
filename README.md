@@ -8,8 +8,8 @@ Unfortunately, the [Enformation](https://www.e-nformation.ro) system used by
 Romanian universities doesn't support EZProxy, so this extension builds an
 equivalent redirecting system for it.
 
-Change Log
-----------
+Changelog
+---------
 
 Version 0.4.1 - February 17, 2024:
 * Use SVG icons.

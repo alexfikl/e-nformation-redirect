@@ -19,7 +19,7 @@ const ENFORMATION_RESOURCES = [
             "https://z.e-nformation.ro/MuseSessionID=06107bc36/MuseProtocol=https/MuseHost=pubs.aip.org/MusePath/$1",
     },
     {
-        name: "APS_Vest",
+        name: "APS_AnelisPlus",
         matchPattern: /^https:\/\/journals\.aps\.org\/(.*?)$/,
         redirectPattern:
             "https://06108bc37-y-https-journals-aps-org.z.e-nformation.ro/$1",
@@ -78,7 +78,7 @@ const ENFORMATION_RESOURCES = [
             "https://0610ibc3x-y-https-digital--library-theiet-org.z.e-nformation.ro/$1",
     },
     {
-        name: "InCites_UVT",
+        name: "InCites_AnelisPlus",
         matchPattern: /^https:\/\/access\.clarivate\.com\/(.*app=incites.*?)$/,
         redirectPattern:
             "https://0610yg30q-y-https-access-clarivate-com.z.e-nformation.ro/$1",
@@ -138,7 +138,12 @@ const ENFORMATION_RESOURCES = [
             "https://0610lbc4m-y-https-link-springer-com.z.e-nformation.ro/$1",
     },
     {
-        name: "TandFJournals_UVT",
+        name: "Statista_UVT",
+        matchPattern: /^https:\/\/www\.statista\.com\/(.*?)$/,
+        redirectPattern: "https://0610zwux1-y-https-www-statista-com.z.e-nformation.ro/$1",
+    },
+    {
+        name: "TandFJournals_AnelisPlus",
         matchPattern: /^https:\/\/www\.tandfonline\.com\/(.*?)$/,
         redirectPattern:
             "https://0610obc4n-y-https-www-tandfonline-com.z.e-nformation.ro/$1",
