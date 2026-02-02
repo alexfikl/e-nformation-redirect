@@ -140,7 +140,8 @@ const ENFORMATION_RESOURCES = [
     {
         name: "Statista_UVT",
         matchPattern: /^https:\/\/www\.statista\.com\/(.*?)$/,
-        redirectPattern: "https://0610zww1y-y-https-www-statista-com.z.e-nformation.ro/$1",
+        redirectPattern:
+            "https://0610zww1y-y-https-www-statista-com.z.e-nformation.ro/$1",
     },
     {
         name: "TandFJournals_AnelisPlus",
