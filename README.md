@@ -12,6 +12,13 @@ yourself with more general add-ons such as [Redirector](https://addons.mozilla.o
 Changelog
 ---------
 
+**Version 0.4.3** - February 2, 2026:
+* Update some redirect patterns.
+* Add subscriptions for `AppliedScienceCO_trial` and `POCO_trial` (both expired for now).
+* Add subscriptions for `DataSweep` (not clear if it works).
+* Add subscriptions for `IOPeBooks_AnelisPlus`, `SpringerEbooks_AnelisPlus`,
+  and `TandFeBooks_AnelisPlus`.
+
 **Version 0.4.2** - January 29, 2025:
 * Update some subscriptions to `AnelisPlus`.
 * Add subscription to `Statista_UVT`.
