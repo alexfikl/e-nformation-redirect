@@ -224,8 +224,7 @@ const ENFORMATION_RESOURCES = [
 
 function canRedirect(url) {
     for (const resource of ENFORMATION_RESOURCES) {
-        const matches = resource.matchPattern.exec(url);
-        if (matches) {
+        if (resource.matchPattern.test(url)) {
             return true;
         }
     }
