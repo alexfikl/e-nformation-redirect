@@ -258,16 +258,11 @@ function findRedirect(url) {
 }
 
 function transformUrl(url, callback) {
-    console.log(`Trying to redirect '${url}'!`);
     const resource = findRedirect(url);
 
     if (resource) {
-        console.log(`Matched '${resource.name}'.`);
-        console.log(`Redirecting to '${resource.redirectTo}'.`);
-
+        console.log(`Matched '${resource.name}': redirecting to '${resource.redirectTo}'.`);
         callback(resource.redirectTo);
-    } else {
-        console.log(`${url} not found.`);
     }
 }
 
