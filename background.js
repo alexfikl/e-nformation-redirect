@@ -1,5 +1,7 @@
 // {{{ resources
 
+// NOTE: the order matters here: the first match is chosen even if subsequent
+// matches could be found. Should put more specific regexes first!
 const ENFORMATION_RESOURCES = [
     {
         name: "APAPsychArticles",
