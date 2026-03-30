@@ -223,9 +223,8 @@ const ENFORMATION_RESOURCES = [
 // {{{ match
 
 function canRedirect(url) {
-    for (var iresource = 0; iresource < ENFORMATION_RESOURCES.length; iresource++) {
-        var resource = ENFORMATION_RESOURCES[iresource];
-        var matches = resource.matchPattern.exec(url);
+    for (const resource of ENFORMATION_RESOURCES) {
+        const matches = resource.matchPattern.exec(url);
         if (matches) {
             return true;
         }
@@ -235,18 +234,18 @@ function canRedirect(url) {
 }
 
 function findRedirect(url) {
-    for (var iresource = 0; iresource < ENFORMATION_RESOURCES.length; iresource++) {
+    for (const resource of ENFORMATION_RESOURCES) {
         // try and match regex
-        var resource = ENFORMATION_RESOURCES[iresource];
-        var matches = resource.matchPattern.exec(url);
+        const matches = resource.matchPattern.exec(url);
         if (!matches) {
             continue;
         }
 
         // replace the redirect url
-        var redirectTo = resource.redirectPattern;
-        for (var i = matches.length - 1; i > 0; i--) {
-            var repl = matches[i];
+        // NOTE: this is done in reverse because the order matters in the patterns
+        let redirectTo = resource.redirectPattern;
+        for (let i = matches.length - 1; i > 0; i--) {
+            const repl = matches[i];
             redirectTo = redirectTo.replace(new RegExp("\\$" + i, "gi"), repl);
         }
 
