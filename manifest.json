@@ -11,15 +11,11 @@
 
     "permissions": ["contextMenus", "tabs"],
     "icons": {
-        "32": "icons/icon-dark-off.svg",
-        "48": "icons/icon-dark-off.svg",
-        "128": "icons/icon-dark-off.svg"
+        "32": "icons/icon-light-off.svg"
     },
 
     "action": {
-        "default_icon": {
-            "32": "icons/icon-dark-off.svg"
-        },
+        "default_icon": "icons/icon-light-off.svg",
         "theme_icons": [
             {
                 "light": "icons/icon-light-off.svg",
