@@ -329,7 +329,7 @@ browser.action.onClicked.addListener((tab) => {
     });
 });
 
-browser.contextMenus.onClicked.addListener((info, tab) => {
+browser.contextMenus.onClicked.addListener((info, _tab) => {
     transformUrl(info.linkUrl, (newUrl) => {
         browser.tabs.create({ url: newUrl });
     });
