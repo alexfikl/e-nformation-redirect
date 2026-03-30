@@ -281,15 +281,17 @@ function updateIcon(tabId, url) {
     const variant = darkQuery.matches ? "dark" : "light";
 
     if (canRedirect(url)) {
-        browser.action.enable(tabId);
+        browser.action.enable(tabId).catch(console.log);
     } else {
-        browser.action.disable(tabId);
+        browser.action.disable(tabId).catch(console.log);
     }
 
-    browser.action.setIcon({
-        path: { 32: `icons/icon-${variant}.svg` },
-        tabId: tabId,
-    });
+    browser.action
+        .setIcon({
+            path: { 32: `icons/icon-${variant}.svg` },
+            tabId: tabId,
+        })
+        .catch(console.log);
 }
 
 darkQuery.addEventListener("change", () => {
@@ -325,13 +327,13 @@ browser.tabs.onActivated.addListener((activeInfo) => {
 
 browser.action.onClicked.addListener((tab) => {
     transformUrl(tab.url, (newUrl) => {
-        browser.tabs.update(tab.id, { url: newUrl });
+        browser.tabs.update(tab.id, { url: newUrl }).catch(console.log);
     });
 });
 
 browser.contextMenus.onClicked.addListener((info, _tab) => {
     transformUrl(info.linkUrl, (newUrl) => {
-        browser.tabs.create({ url: newUrl });
+        browser.tabs.create({ url: newUrl }).catch(console.log);
     });
 });
 
