@@ -9,7 +9,7 @@
         "scripts": ["background.js"]
     },
 
-    "permissions": ["contextMenus", "storage", "tabs", "webRequest"],
+    "permissions": ["contextMenus", "tabs"],
     "icons": {
         "32": "icons/icon-dark-off.svg",
         "48": "icons/icon-dark-off.svg",
