@@ -316,7 +316,9 @@ browser.tabs.onActivated.addListener((activeInfo) => {
     browser.tabs
         .get(activeInfo.tabId)
         .then((tab) => {
-            updateIcon(tab.id, tab.url);
+            if (tab.url) {
+                updateIcon(tab.id, tab.url);
+            }
         })
         .catch(console.log);
 });
