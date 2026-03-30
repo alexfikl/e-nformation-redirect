@@ -1,5 +1,3 @@
-PYTHON := 'python -X dev'
-
 _default:
     @just --list
 
