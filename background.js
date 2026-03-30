@@ -276,22 +276,26 @@ function transformUrl(url, callback) {
 
 // {{{ browser
 
+const darkQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
 function updateIcon(tabId, url) {
+    const state = canRedirect(url) ? "on" : "off";
+    const variant = darkQuery.matches ? "dark" : "light";
     browser.action.setIcon({
-        path: canRedirect(url)
-            ? {
-                  32: "icons/icon-dark-on.svg",
-                  48: "icons/icon-dark-on.svg",
-                  128: "icons/icon-dark-on.svg",
-              }
-            : {
-                  32: "icons/icon-dark-off.svg",
-                  48: "icons/icon-dark-off.svg",
-                  128: "icons/icon-dark-off.svg",
-              },
+        path: { 32: `icons/icon-${variant}-${state}.svg` },
         tabId: tabId,
     });
 }
+
+darkQuery.addEventListener("change", () => {
+    browser.tabs.query({}).then((tabs) => {
+        for (const tab of tabs) {
+            if (tab.url) {
+                updateIcon(tab.id, tab.url);
+            }
+        }
+    });
+});
 
 browser.tabs.onUpdated.addListener((tabId, changeInfo, tabInfo) => {
     if (changeInfo.url) {
