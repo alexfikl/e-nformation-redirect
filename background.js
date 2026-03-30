@@ -50,7 +50,7 @@ const ENFORMATION_RESOURCES = [
         name: "DataSweep",
         matchPattern: /^https:\/\/datasweep\.app\/(.*?)$/,
         redirectPattern:
-            "http://am.e-nformation.ro/login?url=https://www.datasweep.app/$1",
+            "https://am.e-nformation.ro/login?url=https://datasweep.app/$1",
     },
     {
         name: "ScienceDirectEbooks_AnelisPlus",
