@@ -326,9 +326,11 @@ browser.tabs.onActivated.addListener((activeInfo) => {
 });
 
 browser.action.onClicked.addListener((tab) => {
-    transformUrl(tab.url, (newUrl) => {
-        browser.tabs.update(tab.id, { url: newUrl }).catch(console.log);
-    });
+    if (tab.url) {
+        transformUrl(tab.url, (newUrl) => {
+            browser.tabs.update(tab.id, { url: newUrl }).catch(console.log);
+        });
+    }
 });
 
 browser.contextMenus.onClicked.addListener((info, _tab) => {
