@@ -294,13 +294,16 @@ function updateIcon(tabId, url) {
 }
 
 darkQuery.addEventListener("change", () => {
-    browser.tabs.query({}).then((tabs) => {
-        for (const tab of tabs) {
-            if (tab.url) {
-                updateIcon(tab.id, tab.url);
+    browser.tabs
+        .query({})
+        .then((tabs) => {
+            for (const tab of tabs) {
+                if (tab.url) {
+                    updateIcon(tab.id, tab.url);
+                }
             }
-        }
-    });
+        })
+        .catch(console.log);
 });
 
 browser.tabs.onUpdated.addListener((tabId, changeInfo, tabInfo) => {
