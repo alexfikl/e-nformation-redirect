@@ -250,7 +250,6 @@ function findRedirect(url) {
 
         return {
             name: resource.name,
-            redirectFrom: url,
             redirectTo: redirectTo,
         };
     }
@@ -306,7 +305,7 @@ darkQuery.addEventListener("change", () => {
         .catch(console.log);
 });
 
-browser.tabs.onUpdated.addListener((tabId, changeInfo, tabInfo) => {
+browser.tabs.onUpdated.addListener((tabId, changeInfo, _tabInfo) => {
     if (changeInfo.url) {
         updateIcon(tabId, changeInfo.url);
     }
@@ -333,7 +332,7 @@ browser.contextMenus.onClicked.addListener((info, tab) => {
     });
 });
 
-browser.runtime.onInstalled.addListener((details) => {
+browser.runtime.onInstalled.addListener((_details) => {
     browser.contextMenus.create({
         title: "Open link through e-nformation",
         contexts: ["link"],
