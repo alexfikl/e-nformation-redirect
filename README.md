@@ -12,6 +12,11 @@ yourself with more general add-ons such as [Redirector](https://addons.mozilla.o
 Changelog
 ---------
 
+**Version 0.5.0** - March 30, 2026:
+* Fix light and dark icon switching.
+* Disable toolbar button if URL cannot be redirected.
+* Improve error handling by logging more.
+
 **Version 0.4.3** - February 2, 2026:
 * Update some redirect patterns.
 * Add subscriptions for `AppliedScienceCO_trial` and `POCO_trial` (both expired for now).
