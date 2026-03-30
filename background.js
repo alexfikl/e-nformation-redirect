@@ -280,10 +280,16 @@ function transformUrl(url, callback) {
 const darkQuery = window.matchMedia("(prefers-color-scheme: dark)");
 
 function updateIcon(tabId, url) {
-    const state = canRedirect(url) ? "on" : "off";
     const variant = darkQuery.matches ? "dark" : "light";
+
+    if (canRedirect(url)) {
+        browser.action.enable(tabId);
+    } else {
+        browser.action.disable(tabId);
+    }
+
     browser.action.setIcon({
-        path: { 32: `icons/icon-${variant}-${state}.svg` },
+        path: { 32: `icons/icon-${variant}.svg` },
         tabId: tabId,
     });
 }

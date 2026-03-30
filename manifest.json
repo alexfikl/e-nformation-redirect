@@ -11,15 +11,20 @@
 
     "permissions": ["contextMenus", "tabs"],
     "icons": {
-        "32": "icons/icon-light-off.svg"
+        "32": "icons/icon-dark.svg"
     },
 
     "action": {
-        "default_icon": "icons/icon-light-off.svg",
+        "default_icon": "icons/icon-dark.svg",
         "theme_icons": [
             {
-                "light": "icons/icon-light-off.svg",
-                "dark": "icons/icon-dark-off.svg",
+                "light": "icons/icon-light.svg",
+                "dark": "icons/icon-dark.svg",
+                "size": 16
+            },
+            {
+                "light": "icons/icon-light.svg",
+                "dark": "icons/icon-dark.svg",
                 "size": 32
             }
         ],
