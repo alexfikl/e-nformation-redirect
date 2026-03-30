@@ -305,9 +305,12 @@ browser.tabs.onUpdated.addListener((tabId, changeInfo, tabInfo) => {
 });
 
 browser.tabs.onActivated.addListener((activeInfo) => {
-    browser.tabs.get(activeInfo.tabId).then((tab) => {
-        updateIcon(tab.id, tab.url);
-    });
+    browser.tabs
+        .get(activeInfo.tabId)
+        .then((tab) => {
+            updateIcon(tab.id, tab.url);
+        })
+        .catch(console.log);
 });
 
 browser.action.onClicked.addListener((tab) => {
