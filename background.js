@@ -305,11 +305,12 @@ darkQuery.addEventListener("change", () => {
         .catch(console.log);
 });
 
-browser.tabs.onUpdated.addListener((tabId, changeInfo, _tabInfo) => {
-    if (changeInfo.url) {
+browser.tabs.onUpdated.addListener(
+    (tabId, changeInfo) => {
         updateIcon(tabId, changeInfo.url);
-    }
-});
+    },
+    { properties: ["url"] },
+);
 
 browser.tabs.onActivated.addListener((activeInfo) => {
     browser.tabs
