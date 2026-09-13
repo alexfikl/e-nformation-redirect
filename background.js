@@ -3,10 +3,18 @@
 // NOTE: the order matters here: the first match is chosen even if subsequent
 // matches could be found. Should put more specific regexes first!
 //
-// NOTE: every resource is redirected through the e-nformation gateway using
-// its `sourceID`. The original URL is passed verbatim in the `qurl` query param.
+// NOTE: by default every resource is redirected through the e-nformation
+// gateway using its `sourceID`, with the original URL passed verbatim in the
+// `qurl` query param.
+//
+// NOTE: A resource can instead set `proxyToken` to bypass the gateway and
+// build a direct proxy URL, which is needed for vendors the gateway breaks
+// (e.g. it drops query strings for MathSciNet and trips the challenge loop for
+// IEEE).
+
 const ENFORMATION_GATEWAY =
     "https://z.e-nformation.ro/UnivdeVestTM?action=source&sourceID=";
+const ENFORMATION_PROXY_SUFFIX = ".z.e-nformation.ro";
 
 const ENFORMATION_RESOURCES = [
     {
@@ -48,12 +56,12 @@ const ENFORMATION_RESOURCES = [
     {
         name: "IEEEeBooksNOW_AnelisPlus",
         matchPattern: /^https:\/\/ieeexplore\.ieee\.org\/book\//,
-        extraQuery: "&_rwpForceNonNavigationManagerRequest=true",
+        proxyToken: "06105hgrp",
     },
     {
         name: "IEEE_IEL_AnelisPlus",
         matchPattern: /^https:\/\/ieeexplore\.ieee\.org\//,
-        extraQuery: "&_rwpForceNonNavigationManagerRequest=true",
+        proxyToken: "06106hgrs",
     },
     {
         name: "IETDL_AnelisPlus",
@@ -74,6 +82,7 @@ const ENFORMATION_RESOURCES = [
     {
         name: "MathSciNet_AnelisPlus",
         matchPattern: /^https:\/\/mathscinet\.ams\.org\//,
+        proxyToken: "0610js9gu",
         urlTransform: (url) => url.replace("/relay-station", "/article"),
     },
     {
@@ -149,13 +158,23 @@ function findRedirect(url) {
         }
 
         const target = resource.urlTransform ? resource.urlTransform(url) : url;
+
+        if (resource.proxyToken) {
+            const parsed = new URL(target);
+            const host = (resource.proxyHost ?? parsed.host).replaceAll(".", "-");
+
+            return {
+                name: resource.name,
+                redirectTo: `https://${resource.proxyToken}-y-https-${host}${ENFORMATION_PROXY_SUFFIX}${parsed.pathname}${parsed.search}`,
+            };
+        }
+
         const sourceId = encodeURIComponent(resource.name);
         const originalUrl = encodeURIComponent(target);
-        const extraQuery = resource.extraQuery ?? "";
 
         return {
             name: resource.name,
-            redirectTo: `${ENFORMATION_GATEWAY}${sourceId}${extraQuery}&qurl=${originalUrl}`,
+            redirectTo: `${ENFORMATION_GATEWAY}${sourceId}&qurl=${originalUrl}`,
         };
     }
 
