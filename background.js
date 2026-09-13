@@ -2,219 +2,135 @@
 
 // NOTE: the order matters here: the first match is chosen even if subsequent
 // matches could be found. Should put more specific regexes first!
+//
+// NOTE: every resource is redirected through the e-nformation gateway using
+// its `sourceID`. The original URL is passed verbatim in the `qurl` query param.
+const ENFORMATION_GATEWAY =
+    "https://z.e-nformation.ro/UnivdeVestTM?action=source&sourceID=";
+
 const ENFORMATION_RESOURCES = [
     {
-        name: "APAPsychArticles",
-        matchPattern: /^https:\/\/oce\.ovid\.com\/(.*?)$/,
-        redirectPattern:
-            "https://z.e-nformation.ro/UnivdeVestTM?action=source&sourceID=APAPsychArticles",
-    },
-    {
         name: "ACS_AnelisPlus",
-        matchPattern: /^https:\/\/pubs\.acs\.org\/(.*?)$/,
-        redirectPattern: "https://0610whgq2-y-https-pubs-acs-org.z.e-nformation.ro/$1",
+        matchPattern: /^https:\/\/pubs\.acs\.org\//,
     },
     {
         name: "AIP_AnelisPlus",
-        matchPattern: /^https:\/\/pubs\.aip\.org\/(.*?)$/,
-        redirectPattern: "https://06114hgq9-y-https-pubs-aip-org.z.e-nformation.ro/$1",
+        matchPattern: /^https:\/\/pubs\.aip\.org\//,
     },
     {
         name: "APS_AnelisPlus",
-        matchPattern: /^https:\/\/journals\.aps\.org\/(.*?)$/,
-        redirectPattern:
-            "https://06111hgqd-y-https-journals-aps-org.z.e-nformation.ro/$1",
+        matchPattern: /^https:\/\/journals\.aps\.org\//,
     },
     {
         name: "AppliedScienceCO_trial",
-        matchPattern: /^https:\/\/appliedsciencecommons\.net\/(.*?)$/,
-        redirectPattern:
-            "https://0611dhgqj-y-https-appliedsciencecommons-net.z.e-nformation.ro/$1",
+        matchPattern: /^https:\/\/appliedsciencecommons\.net\//,
     },
     {
         name: "POCO_trial",
-        matchPattern: /^https:\/\/policycommons\.net\/(.*?)$/,
-        redirectPattern:
-            "https://06115hgqn-y-https-policycommons-net.z.e-nformation.ro/$1",
+        matchPattern: /^https:\/\/policycommons\.net\//,
     },
     {
         name: "CabiDL_AnelisPlus",
-        matchPattern: /^https:\/\/www\.cabidigitallibrary\.org\/(.*?)$/,
-        redirectPattern:
-            "https://0610hhgqs-y-https-www-cabidigitallibrary-org.z.e-nformation.ro/$1",
+        matchPattern: /^https:\/\/www\.cabidigitallibrary\.org\//,
     },
     {
         name: "CEEOL_AnelisPlus",
-        matchPattern: /^https:\/\/www\.ceeol\.com\/(.*?)$/,
-        redirectPattern: "https://06113hgqw-y-https-www-ceeol-com.z.e-nformation.ro/$1",
-    },
-    {
-        name: "DataSweep",
-        matchPattern: /^https:\/\/datasweep\.app\/(.*?)$/,
-        redirectPattern:
-            "https://am.e-nformation.ro/login?url=https://datasweep.app/$1",
+        matchPattern: /^https:\/\/www\.ceeol\.com\//,
     },
     {
         name: "ScienceDirectEbooks_AnelisPlus",
-        matchPattern: /^https:\/\/www\.sciencedirect\.com\/bookseries\/(.*?)$/,
-        redirectPattern:
-            "https://0610dhgr1-y-https-www-sciencedirect-com.z.e-nformation.ro/bookseries/$1",
+        matchPattern: /^https:\/\/www\.sciencedirect\.com\//,
     },
     {
-        name: "ScienceDirect_AnelisPlus",
-        matchPattern: /^https:\/\/www\.sciencedirect\.com\/(.*?)$/,
-        redirectPattern:
-            "https://0610dhgr1-y-https-www-sciencedirect-com.z.e-nformation.ro/$1",
-    },
-    {
-        name: "EmeraldEbooks_AnelisPlus",
-        matchPattern: /^https:\/\/www\.emerald\.com\/books\/(.*?)$/,
-        redirectPattern:
-            "https://06104hgre-y-https-www-emerald-com.z.e-nformation.ro/books/$1",
-    },
-    {
-        name: "EmeraldJournals_AnelisPlus",
-        matchPattern: /^https:\/\/www\.emerald\.com\/(.*?)$/,
-        redirectPattern:
-            "https://06104hgre-y-https-www-emerald-com.z.e-nformation.ro/$1",
+        name: "EmeraldeBooks_AnelisPlus",
+        matchPattern: /^https:\/\/www\.emerald\.com\//,
     },
     {
         name: "IEEEeBooksNOW_AnelisPlus",
-        matchPattern: /^https:\/\/ieeexplore\.ieee\.org\/book\/(.*?)$/,
-        redirectPattern:
-            "https://06105hgrp-y-https-ieeexplore-ieee-org.z.e-nformation.ro/book/$1",
+        matchPattern: /^https:\/\/ieeexplore\.ieee\.org\/book\//,
+        extraQuery: "&_rwpForceNonNavigationManagerRequest=true",
     },
     {
         name: "IEEE_IEL_AnelisPlus",
-        matchPattern: /^https:\/\/ieeexplore\.ieee\.org\/(.*?)$/,
-        redirectPattern:
-            "https://06106hgrs-y-https-ieeexplore-ieee-org.z.e-nformation.ro/$1",
+        matchPattern: /^https:\/\/ieeexplore\.ieee\.org\//,
+        extraQuery: "&_rwpForceNonNavigationManagerRequest=true",
     },
     {
         name: "IETDL_AnelisPlus",
-        matchPattern: /^https:\/\/digital-library\.theiet\.org\/(.*?)$/,
-        redirectPattern:
-            "https://0610ihgrx-y-https-digital--library-theiet-org.z.e-nformation.ro/$1",
+        matchPattern: /^https:\/\/digital-library\.theiet\.org\//,
     },
     {
         name: "InCites_AnelisPlus",
-        matchPattern: /^https:\/\/access\.clarivate\.com\/(.*app=incites.*?)$/,
-        redirectPattern:
-            "https://0610yhgsg-y-https-access-clarivate-com.z.e-nformation.ro/$1",
+        matchPattern: /^https:\/\/access\.clarivate\.com\/.*app=incites/,
     },
     {
         name: "IOPeBooks_AnelisPlus",
-        matchPattern: /^https:\/\/iopscience\.iop\.org\/book\/(.*?)$/,
-        redirectPattern:
-            "https://0611bhgsm-y-https-iopscience-iop-org.z.e-nformation.ro/book/$1",
+        matchPattern: /^https:\/\/iopscience\.iop\.org\/book\//,
     },
     {
         name: "IOPJournals_AnelisPlus",
-        matchPattern: /^https:\/\/iopscience\.iop\.org\/(.*?)$/,
-        redirectPattern:
-            "https://06109hgsh-y-https-iopscience-iop-org.z.e-nformation.ro/$1",
+        matchPattern: /^https:\/\/iopscience\.iop\.org\//,
     },
     {
         name: "MathSciNet_AnelisPlus",
-        matchPattern: /^https:\/\/mathscinet\.ams\.org\/(.*?)$/,
-        redirectPattern:
-            "https://0610jhgt8-y-https-mathscinet-ams-org.z.e-nformation.ro/$1",
+        matchPattern: /^https:\/\/mathscinet\.ams\.org\//,
+        urlTransform: (url) => url.replace("/relay-station", "/article"),
     },
     {
         name: "Nature_AnelisPlus",
-        matchPattern: /^https:\/\/www\.nature\.com\/(.*?)$/,
-        redirectPattern:
-            "https://0610uhgta-y-https-www-nature-com.z.e-nformation.ro/$1",
-    },
-    {
-        name: "PQDT_UVT",
-        matchPattern: /^https:\/\/www\.proquest\.com\/(.*sourcetype=Dissertations.*?)$/,
-        redirectPattern:
-            "https://z.e-nformation.ro/UnivdeVestTM?action=source&sourceID=PQDT_UVT",
-    },
-    {
-        name: "PQCentral_AnelisPlus",
-        matchPattern: /^https:\/\/www\.proquest\.com\/(.*?)$/,
-        redirectPattern:
-            "https://z.e-nformation.ro/UnivdeVestTM?action=source&sourceID=PQCentral_AnelisPlus",
+        matchPattern: /^https:\/\/www\.nature\.com\//,
     },
     {
         name: "SageJournals_AnelisPlus",
-        matchPattern: /^https:\/\/journals\.sagepub\.com\/(.*?)$/,
-        redirectPattern:
-            "https://0610phgtp-y-https-journals-sagepub-com.z.e-nformation.ro/$1",
+        matchPattern: /^https:\/\/journals\.sagepub\.com\//,
     },
     {
         name: "SAGEKnowledgeEbooks_AnelisPlus",
-        matchPattern: /^https:\/\/sk\.sagepub\.com\/(.*?)$/,
-        redirectPattern:
-            "https://06102hgu4-y-https-sk-sagepub-com.z.e-nformation.ro/$1",
+        matchPattern: /^https:\/\/sk\.sagepub\.com\//,
     },
     {
         name: "Scopus_AnelisPlus",
-        matchPattern: /^https:\/\/www\.scopus\.com\/(.*?)$/,
-        redirectPattern:
-            "https://0610eww1w-y-https-www-scopus-com.z.e-nformation.ro/$1",
+        matchPattern: /^https:\/\/www\.scopus\.com\//,
     },
     {
         name: "SpringerEbooks_AnelisPlus",
-        matchPattern: /^https:\/\/link\.springer\.com\/book\/(.*?)$/,
-        redirectPattern:
-            "https://0611chgug-y-https-link-springer-com.z.e-nformation.ro/book/$1",
+        matchPattern: /^https:\/\/link\.springer\.com\/book\//,
     },
     {
         name: "SpringerLink_AnelisPlus",
-        matchPattern: /^https:\/\/link\.springer\.com\/(.*?)$/,
-        redirectPattern:
-            "https://0610lhgut-y-https-link-springer-com.z.e-nformation.ro/$1",
+        matchPattern: /^https:\/\/link\.springer\.com\//,
     },
     {
         name: "Statista_UVT",
-        matchPattern: /^https:\/\/www\.statista\.com\/(.*?)$/,
-        redirectPattern:
-            "https://0610zhguw-y-https-www-statista-com.z.e-nformation.ro/$1",
+        matchPattern: /^https:\/\/www\.statista\.com\//,
     },
     {
         name: "TandFeBooks_AnelisPlus",
-        matchPattern: /^https:\/\/www\.taylorfrancis\.com\/books\/(.*?)$/,
-        redirectPattern:
-            "https://0611ahgv4-y-https-www-taylorfrancis-com.z.e-nformation.ro/books/$1",
+        matchPattern: /^https:\/\/www\.taylorfrancis\.com\/books\//,
     },
     {
         name: "TandFJournals_AnelisPlus",
-        matchPattern: /^https:\/\/www\.tandfonline\.com\/(.*?)$/,
-        redirectPattern:
-            "https://06110hgv1-y-https-www-tandfonline-com.z.e-nformation.ro/$1",
+        matchPattern: /^https:\/\/www\.tandfonline\.com\//,
     },
     {
         name: "ClarivateWoS_AnelisPlus",
-        matchPattern: /^https:\/\/access\.clarivate\.com\/(.*app=wos.*?)$/,
-        redirectPattern:
-            "https://0610mww24-y-https-www-webofscience-com.z.e-nformation.ro/$1",
+        matchPattern: /^https:\/\/access\.clarivate\.com\/.*app=wos/,
     },
     {
         name: "WileyBooks_AnelisPlus",
-        matchPattern: /^https:\/\/onlinelibrary\.wiley\.com\/doi\/book\/(.*?)$/,
-        redirectPattern:
-            "https://0610ghgve-y-https-onlinelibrary-wiley-com.z.e-nformation.ro/doi/book/$1",
+        matchPattern: /^https:\/\/onlinelibrary\.wiley\.com\/doi\/book\//,
     },
     {
         name: "WileyJournals_AnelisPlus",
-        matchPattern: /^https:\/\/.*onlinelibrary\.wiley\.com\/(.*?)$/,
-        redirectPattern:
-            "https://0610fhgvi-y-https-onlinelibrary-wiley-com.z.e-nformation.ro/$1",
+        matchPattern: /^https:\/\/.*onlinelibrary\.wiley\.com\//,
     },
     {
         name: "DeGruytereBooks_AnelisPlus",
-        matchPattern: /^https:\/\/www\.degruyterbrill\.com\/(.*?)$/,
-        redirectPattern:
-            "https://06103hgvn-y-https-www-degruyterbrill-com.z.e-nformation.ro/$1",
+        matchPattern: /^https:\/\/www\.degruyterbrill\.com\//,
     },
     {
         name: "iGLibraryALA_AnelisPlus",
-        matchPattern: /^https:\/\/.*\.igpublish\.com\/(.*?)$/,
-        redirectPattern:
-            "https://0610nhgvv-y-https-portal-igpublish-com.z.e-nformation.ro/$1",
+        matchPattern: /^https:\/\/.*\.igpublish\.com\//,
     },
 ];
 
@@ -223,34 +139,23 @@ const ENFORMATION_RESOURCES = [
 // {{{ match
 
 function canRedirect(url) {
-    for (const resource of ENFORMATION_RESOURCES) {
-        if (resource.matchPattern.test(url)) {
-            return true;
-        }
-    }
-
-    return false;
+    return ENFORMATION_RESOURCES.some((resource) => resource.matchPattern.test(url));
 }
 
 function findRedirect(url) {
     for (const resource of ENFORMATION_RESOURCES) {
-        // try and match regex
-        const matches = resource.matchPattern.exec(url);
-        if (!matches) {
+        if (!resource.matchPattern.test(url)) {
             continue;
         }
 
-        // replace the redirect url
-        // NOTE: this is done in reverse because the order matters in the patterns
-        let redirectTo = resource.redirectPattern;
-        for (let i = matches.length - 1; i > 0; i--) {
-            const repl = matches[i];
-            redirectTo = redirectTo.replace(new RegExp("\\$" + i, "gi"), repl);
-        }
+        const target = resource.urlTransform ? resource.urlTransform(url) : url;
+        const sourceId = encodeURIComponent(resource.name);
+        const originalUrl = encodeURIComponent(target);
+        const extraQuery = resource.extraQuery ?? "";
 
         return {
             name: resource.name,
-            redirectTo: redirectTo,
+            redirectTo: `${ENFORMATION_GATEWAY}${sourceId}${extraQuery}&qurl=${originalUrl}`,
         };
     }
 
