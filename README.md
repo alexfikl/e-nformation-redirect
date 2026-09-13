@@ -12,6 +12,12 @@ yourself with more general add-ons such as [Redirector](https://addons.mozilla.o
 Changelog
 ---------
 
+**Version 0.6.0** - September 13, 2026:
+* Redirect through the e-nformation gateway using `sourceID`.
+* Fix `sourceID`s for Emerald and ScienceDirect.
+* Remove support for `DataSweep`, Ovid (`APAPsychArticles`), and ProQuest
+  (`PQDT_UVT`, `PQCentral_AnelisPlus`) subscriptions.
+
 **Version 0.5.0** - March 30, 2026:
 * Fix light and dark icon switching.
 * Disable toolbar button if URL cannot be redirected.
